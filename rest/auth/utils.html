@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.1" />
-<title>gcloud API documentation</title>
+<title>gcloud.rest.auth.utils API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,26 +17,120 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>gcloud</code></h1>
+<h1 class="title">Module <code>gcloud.rest.auth.utils</code></h1>
 </header>
 <section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+import base64
+import sys
+from typing import Union
+
+
+def decode(payload     )         :
+    &#34;&#34;&#34;
+    Modified Base64 for URL variants exist, where the + and / characters of
+    standard Base64 are respectively replaced by - and _.
+
+    See https://en.wikipedia.org/wiki/Base64#URL_applications
+    &#34;&#34;&#34;
+
+    if sys.version_info[0] &lt; 3:
+        # Base64 encode/decode does not accept `str` as input in python2
+        # By running `future-fstrings-show`, it adds `unicode_literals` that
+        # redefines some classes so the default behaviour changes
+        def native_str_to_bytes(s, encoding=None):
+            from future.types import newbytes
+            return newbytes(s, encoding=encoding)
+        payload = native_str_to_bytes(payload, encoding=&#39;utf-8&#39;)
+
+    return base64.b64decode(payload, altchars=b&#39;-_&#39;)
+
+
+def encode(payload                   )         :
+    &#34;&#34;&#34;
+    Modified Base64 for URL variants exist, where the + and / characters of
+    standard Base64 are respectively replaced by - and _.
+
+    See https://en.wikipedia.org/wiki/Base64#URL_applications
+    &#34;&#34;&#34;
+    if isinstance(payload, str):
+        payload = payload.encode(&#39;utf-8&#39;)
+
+    return base64.b64encode(payload, altchars=b&#39;-_&#39;)</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="gcloud.aio" href="aio/index.html">gcloud.aio</a></code></dt>
+<dt id="gcloud.rest.auth.utils.decode"><code class="name flex">
+<span>def <span class="ident">decode</span></span>(<span>payload)</span>
+</code></dt>
 <dd>
-<section class="desc"></section>
+<section class="desc"><p>Modified Base64 for URL variants exist, where the + and / characters of
+standard Base64 are respectively replaced by - and _.</p>
+<p>See <a href="https://en.wikipedia.org/wiki/Base64#URL_applications">https://en.wikipedia.org/wiki/Base64#URL_applications</a></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def decode(payload     )         :
+    &#34;&#34;&#34;
+    Modified Base64 for URL variants exist, where the + and / characters of
+    standard Base64 are respectively replaced by - and _.
+
+    See https://en.wikipedia.org/wiki/Base64#URL_applications
+    &#34;&#34;&#34;
+
+    if sys.version_info[0] &lt; 3:
+        # Base64 encode/decode does not accept `str` as input in python2
+        # By running `future-fstrings-show`, it adds `unicode_literals` that
+        # redefines some classes so the default behaviour changes
+        def native_str_to_bytes(s, encoding=None):
+            from future.types import newbytes
+            return newbytes(s, encoding=encoding)
+        payload = native_str_to_bytes(payload, encoding=&#39;utf-8&#39;)
+
+    return base64.b64decode(payload, altchars=b&#39;-_&#39;)</code></pre>
+</details>
 </dd>
-<dt><code class="name"><a title="gcloud.rest" href="rest/index.html">gcloud.rest</a></code></dt>
+<dt id="gcloud.rest.auth.utils.encode"><code class="name flex">
+<span>def <span class="ident">encode</span></span>(<span>payload)</span>
+</code></dt>
 <dd>
-<section class="desc"></section>
+<section class="desc"><p>Modified Base64 for URL variants exist, where the + and / characters of
+standard Base64 are respectively replaced by - and _.</p>
+<p>See <a href="https://en.wikipedia.org/wiki/Base64#URL_applications">https://en.wikipedia.org/wiki/Base64#URL_applications</a></p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def encode(payload                   )         :
+    &#34;&#34;&#34;
+    Modified Base64 for URL variants exist, where the + and / characters of
+    standard Base64 are respectively replaced by - and _.
+
+    See https://en.wikipedia.org/wiki/Base64#URL_applications
+    &#34;&#34;&#34;
+    if isinstance(payload, str):
+        payload = payload.encode(&#39;utf-8&#39;)
+
+    return base64.b64encode(payload, altchars=b&#39;-_&#39;)</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -47,10 +141,15 @@
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="gcloud.aio" href="aio/index.html">gcloud.aio</a></code></li>
-<li><code><a title="gcloud.rest" href="rest/index.html">gcloud.rest</a></code></li>
+<li><code><a title="gcloud.rest.auth" href="index.html">gcloud.rest.auth</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="gcloud.rest.auth.utils.decode" href="#gcloud.rest.auth.utils.decode">decode</a></code></li>
+<li><code><a title="gcloud.rest.auth.utils.encode" href="#gcloud.rest.auth.utils.encode">encode</a></code></li>
 </ul>
 </li>
 </ul>
