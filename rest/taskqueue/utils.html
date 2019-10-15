@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.1" />
-<title>gcloud.rest API documentation</title>
+<title>gcloud.rest.taskqueue.utils API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,42 +17,102 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>gcloud.rest</code></h1>
+<h1 class="title">Module <code>gcloud.rest.taskqueue.utils</code></h1>
 </header>
 <section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+import base64
+import logging
+
+log = logging.getLogger(__name__)
+
+
+# TODO(nick): remove in favor of auth utils. Requires updating auth lib first.
+def decode(payload):
+    &#34;&#34;&#34;
+    https://en.wikipedia.org/wiki/Base64#URL_applications modified Base64
+    for URL variants exist, where the + and / characters of standard
+    Base64 are respectively replaced by - and _
+    &#34;&#34;&#34;
+    variant = payload.replace(&#39;-&#39;, &#39;+&#39;).replace(&#39;_&#39;, &#39;/&#39;)
+    return base64.b64decode(variant).decode()
+
+
+def encode(payload):
+    &#34;&#34;&#34;
+    https://en.wikipedia.org/wiki/Base64#URL_applications modified Base64
+    for URL variants exist, where the + and / characters of standard
+    Base64 are respectively replaced by - and _
+    &#34;&#34;&#34;
+    if not isinstance(payload, bytes):
+        payload = payload.encode(&#39;utf-8&#39;)
+
+    encoded = base64.b64encode(payload)
+    return encoded.replace(b&#39;+&#39;, b&#39;-&#39;).replace(b&#39;/&#39;, b&#39;_&#39;).decode(&#39;utf-8&#39;)</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="gcloud.rest.auth" href="auth/index.html">gcloud.rest.auth</a></code></dt>
+<dt id="gcloud.rest.taskqueue.utils.decode"><code class="name flex">
+<span>def <span class="ident">decode</span></span>(<span>payload)</span>
+</code></dt>
 <dd>
-<section class="desc"></section>
+<section class="desc"><p><a href="https://en.wikipedia.org/wiki/Base64#URL_applications">https://en.wikipedia.org/wiki/Base64#URL_applications</a> modified Base64
+for URL variants exist, where the + and / characters of standard
+Base64 are respectively replaced by - and _</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def decode(payload):
+    &#34;&#34;&#34;
+    https://en.wikipedia.org/wiki/Base64#URL_applications modified Base64
+    for URL variants exist, where the + and / characters of standard
+    Base64 are respectively replaced by - and _
+    &#34;&#34;&#34;
+    variant = payload.replace(&#39;-&#39;, &#39;+&#39;).replace(&#39;_&#39;, &#39;/&#39;)
+    return base64.b64decode(variant).decode()</code></pre>
+</details>
 </dd>
-<dt><code class="name"><a title="gcloud.rest.bigquery" href="bigquery/index.html">gcloud.rest.bigquery</a></code></dt>
+<dt id="gcloud.rest.taskqueue.utils.encode"><code class="name flex">
+<span>def <span class="ident">encode</span></span>(<span>payload)</span>
+</code></dt>
 <dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="gcloud.rest.datastore" href="datastore/index.html">gcloud.rest.datastore</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="gcloud.rest.kms" href="kms/index.html">gcloud.rest.kms</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="gcloud.rest.storage" href="storage/index.html">gcloud.rest.storage</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="gcloud.rest.taskqueue" href="taskqueue/index.html">gcloud.rest.taskqueue</a></code></dt>
-<dd>
-<section class="desc"></section>
+<section class="desc"><p><a href="https://en.wikipedia.org/wiki/Base64#URL_applications">https://en.wikipedia.org/wiki/Base64#URL_applications</a> modified Base64
+for URL variants exist, where the + and / characters of standard
+Base64 are respectively replaced by - and _</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def encode(payload):
+    &#34;&#34;&#34;
+    https://en.wikipedia.org/wiki/Base64#URL_applications modified Base64
+    for URL variants exist, where the + and / characters of standard
+    Base64 are respectively replaced by - and _
+    &#34;&#34;&#34;
+    if not isinstance(payload, bytes):
+        payload = payload.encode(&#39;utf-8&#39;)
+
+    encoded = base64.b64encode(payload)
+    return encoded.replace(b&#39;+&#39;, b&#39;-&#39;).replace(b&#39;/&#39;, b&#39;_&#39;).decode(&#39;utf-8&#39;)</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -65,17 +125,13 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="gcloud" href="../index.html">gcloud</a></code></li>
+<li><code><a title="gcloud.rest.taskqueue" href="index.html">gcloud.rest.taskqueue</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="gcloud.rest.auth" href="auth/index.html">gcloud.rest.auth</a></code></li>
-<li><code><a title="gcloud.rest.bigquery" href="bigquery/index.html">gcloud.rest.bigquery</a></code></li>
-<li><code><a title="gcloud.rest.datastore" href="datastore/index.html">gcloud.rest.datastore</a></code></li>
-<li><code><a title="gcloud.rest.kms" href="kms/index.html">gcloud.rest.kms</a></code></li>
-<li><code><a title="gcloud.rest.storage" href="storage/index.html">gcloud.rest.storage</a></code></li>
-<li><code><a title="gcloud.rest.taskqueue" href="taskqueue/index.html">gcloud.rest.taskqueue</a></code></li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="gcloud.rest.taskqueue.utils.decode" href="#gcloud.rest.taskqueue.utils.decode">decode</a></code></li>
+<li><code><a title="gcloud.rest.taskqueue.utils.encode" href="#gcloud.rest.taskqueue.utils.encode">encode</a></code></li>
 </ul>
 </li>
 </ul>
