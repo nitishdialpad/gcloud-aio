@@ -55,7 +55,7 @@ __all__ = [&#39;__version__&#39;, &#39;SubscriberClient&#39;]</code></pre>
 <dl>
 <dt id="gcloud.aio.pubsub.SubscriberClient"><code class="flex name class">
 <span>class <span class="ident">SubscriberClient</span></span>
-<span>(</span><span>*, loop=None)</span>
+<span>(</span><span>*, loop=None, **kwargs)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
@@ -64,12 +64,9 @@ __all__ = [&#39;__version__&#39;, &#39;SubscriberClient&#39;]</code></pre>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class SubscriberClient:
-
-    def __init__(self,
-                 *,
-                 loop: Optional[asyncio.AbstractEventLoop] = None
-                 ) -&gt; None:
-        self._subscriber = pubsub.SubscriberClient()
+    def __init__(self, *, loop: Optional[asyncio.AbstractEventLoop] = None,
+                 **kwargs: Any) -&gt; None:
+        self._subscriber = pubsub.SubscriberClient(**kwargs)
         self.loop = loop or asyncio.get_event_loop()
 
     def create_subscription(self,
